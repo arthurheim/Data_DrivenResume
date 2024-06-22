@@ -1,0 +1,7 @@
+"0","education %>%"
+"0","  detailed_entries(where = Institution,"
+"0","                   when = Year,"
+"0","                   with = Degree,"
+"0","                   what = Major,"
+"0","                   why = Details,"
+"0","                   .protect = FALSE)"

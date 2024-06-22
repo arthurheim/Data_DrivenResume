@@ -1,0 +1,5 @@
+"0","# did not like this format so will add manually for now"
+"0","bib <- bibliography_entries(here(""Data"", ""publi_heim.bib""))%>%distinct(title,.keep_all = TRUE) %>% "
+"0","  mutate(dt=as.numeric(str_remove_all(id,""[:alpha:]""))) %>% arrange(desc(dt))"
+"0",""
+"0","bib %>% filter(bib$type==""book"")"

@@ -1,0 +1,250 @@
+---
+name: Arthur
+surname: Heim
+qualifications: PhD
+position: "Postdoctoral researcher, French National Family Allowance Fund (Cnaf)"
+pronouns: he/they:him/them
+address: "Paris, France"
+link-citations: true
+citecolor: blue
+#profilepic: "cv-vitae/img/PSE_a.heim-12.jpg"
+www: parisschoolofeconomics.eu/en/heim-arthur/
+email: "heimarthur@gmail.com"
+twitter: heimarthur
+headcolor: "a349a4"
+footcolor: "ff0080"
+linkcolor: "ff0080"
+urlcolor: "0000ff" 
+#github: shaziaruybal
+#orcid: "0000-0002-0495-179X"
+#googlescholar: "E7dY4foAAAAJ"
+aboutme: "I am an applied economist specialising in public policies to reduce inequalities and poverty in France. My work focuses on using microeconometrics and field experiments to study the effects of active labor market policies for single mothers and how administrative support and information can improve access to early childcare. I also use market design and implement fair assignment mechanisms for daycare seats in French municipalities."
+header-includes:
+  \usepackage{float}
+date: "`r format(Sys.time(), '%B %Y')`"
+output:
+  vitae::awesomecv:
+    page_total: true
+    latex_engine: 'xelatex'
+    keep_tex: true
+cls: cv-vitae/awesome-cvCustom.cls    
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(here)
+library(vitae)
+library(kableExtra)
+library(emojifont)
+library(fontawesome)
+library(tibble)
+
+```
+
+```{r functions, include=FALSE}
+readExcelSheets <- function(filename){
+  # read all sheets in .xlsx 
+  all <- readxl::excel_sheets(filename)
+  
+  # import each sheet into a list using readxl::read_excel
+  list <- lapply(all, function(x) readxl::read_excel(filename, sheet = x))
+  
+  # save sheet name for each sheet (list)
+  names(list) <- all
+  
+  # breaks up list and creates a dataframe for each sheet with df names matching sheet names
+  list2env(list, envir = .GlobalEnv)
+}
+```
+
+```{r load data, include=FALSE}
+# appointments <- read_csv(here("data", "appointments.csv"))
+# education <- read_csv(here("data", "education.csv"))
+# research <- read_csv(here("data", "research_experience.csv"))
+# teaching <- read_csv(here("data", "teaching_supervision.csv"))
+# awards <- read_csv(here("data", "awards.csv"))
+# leadership <- read_csv(here("data", "leadership.csv"))
+# presentations <- read_csv(here("data", "presentations.csv"))
+# training <- read_csv(here("data", "training.csv"))
+# skills <- read_csv(here("data", "skills_table.csv"))
+# tools <- read_csv(here("data", "digital_tools.csv"))
+
+readExcelSheets(here::here("Data", "ArthurHeimCareerDataEn.xlsx"))
+
+
+
+#bib <- tempfile(fileext = ".bib")
+
+
+```
+
+Experiences
+
+## Current position
+
+```{r CurJob}
+MyJob <- appointments %>%
+  filter(current == "yes") %>% as.tibble() %>% 
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+
+MyJob
+```
+
+## Past experiences
+
+```{r}
+otherjob <- appointments %>%
+  filter(current != "yes") %>%
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+
+otherjob
+```
+
+# Education
+
+```{r}
+education %>%
+  detailed_entries(where = Institution,
+                   when = Year,
+                   with = Degree,
+                   what = Major,
+                   why = Details,
+                   .protect = FALSE)
+```
+
+<!-- \newpage -->
+<!-- # Skills -->
+```{r include=FALSE}
+# skills <- read_csv(here("data", "skills.csv"))
+# skills %>%
+#   detailed_entries(with = type,
+#                    why = skill)
+#
+skills %>%
+  kable(booktabs = TRUE, format = "latex",escape = FALSE) %>%
+  kable_styling(full_width = F,font_size=10, latex_options = "hold_position") %>%
+  row_spec(0, bold = T)
+```
+
+\newpage
+
+# Teaching experiences
+
+```{r}
+teaching %>%
+  detailed_entries(what = institution,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   with = role,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+# Most recent or ongoing research
+
+## PhD thesis
+
+```{r}
+Thesis %>%
+  filter(draftAvailable == "yes") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+## Ongoing research
+
+```{r}
+Thesis %>%
+  filter(status == "Ongoing") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+## Collective work on reproducible research
+
+```{r}
+Thesis %>%
+  filter(status == "Collective") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+
+\newpage
+# Pre-doctoral publications in French
+
+
+## Book
+<!-- \footnotesize -->
+```{r}
+# did not like this format so will add manually for now
+bib <- bibliography_entries(here("Data", "publi_heim.bib"))%>%distinct(title,.keep_all = TRUE) %>% 
+  mutate(dt=as.numeric(str_remove_all(id,"[:alpha:]"))) %>% arrange(desc(dt))
+
+bib %>% filter(bib$type=="book")
+
+  #arrange(desc(issued))
+# bibliography_entries(here("data", "papers.bib"))
+```
+
+
+## Other publications
+<!-- \footnotesize -->
+```{r}
+
+
+bib %>% filter(dt<2023 & (type %in% c("webpage",'book')==FALSE) & str_detect(bib$id,"ontaignac")==FALSE)
+
+  #arrange(desc(issued))
+# bibliography_entries(here("data", "papers.bib"))
+```
+
+# Selected conferences
+
+
+```{r}
+conferences %>%
+  detailed_entries(what = institution,
+                   when = date,
+                   with = role,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+<!-- \clearpage -->
+
+```{r, eval=TRUE,include=FALSE}
+rm(list=ls())
+```

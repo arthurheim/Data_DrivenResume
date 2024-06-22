@@ -1,0 +1,3 @@
+"0",""
+"0",""
+"0","bib %>% filter(dt<2023 & (type %in% c(""webpage"",'book')==FALSE) & str_detect(bib$id,""ontaignac"")==FALSE)"

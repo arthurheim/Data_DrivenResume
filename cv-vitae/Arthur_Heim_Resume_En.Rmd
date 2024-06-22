@@ -1,0 +1,449 @@
+---
+name: Arthur
+surname: Heim
+qualifications: PhD
+position: "Postdoctoral researcher, French National Family Allowance Fund (Cnaf)"
+address: "Paris, France"
+link-citations: true
+linkcolor: blue
+urlcolor: blue 
+citecolor: blue
+# profilepic: "./img/headshot_2020.png"
+#www: shaziaruybal.com
+email: "heimarthur@gmail.com"
+twitter: heimarthur
+#github: shaziaruybal
+#orcid: "0000-0002-0495-179X"
+#googlescholar: "E7dY4foAAAAJ"
+aboutme: "I am an applied economist specialising in public policies to reduce inequalities and poverty in France. My work focuses on using microeconometrics and field experiments to study the effects of active labor market policies for single mothers and how administrative support and information can improve access to early childcare. I also use market design and implement fair assignment mechanisms for daycare seats in French municipalities."
+headcolor: 414141
+header-includes:
+  \usepackage{float}
+date: "`r format(Sys.time(), '%B %Y')`"
+output:
+  vitae::awesomecv:
+    page_total: true
+    latex_engine: 'xelatex'
+    keep_tex: true
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+library(tidyverse)
+library(here)
+library(vitae)
+library(kableExtra)
+library(emojifont)
+library(fontawesome)
+doc.type <- knitr::opts_knit$get('rmarkdown.pandoc.to')
+# #local = knitr::knit_global()
+ #options(knitr.table.format = "latex")
+ options(kableExtra.latex.load_packages = TRUE)
+
+```
+
+```{r functions}
+readExcelSheets <- function(filename){
+  # read all sheets in .xlsx 
+  all <- readxl::excel_sheets(filename)
+  
+  # import each sheet into a list using readxl::read_excel
+  list <- lapply(all, function(x) readxl::read_excel(filename, sheet = x))
+  
+  # save sheet name for each sheet (list)
+  names(list) <- all
+  
+  # breaks up list and creates a dataframe for each sheet with df names matching sheet names
+  list2env(list, envir = .GlobalEnv)
+}
+```
+
+```{r load data, include=FALSE}
+# appointments <- read_csv(here("data", "appointments.csv"))
+# education <- read_csv(here("data", "education.csv"))
+# research <- read_csv(here("data", "research_experience.csv"))
+# teaching <- read_csv(here("data", "teaching_supervision.csv"))
+# awards <- read_csv(here("data", "awards.csv"))
+# leadership <- read_csv(here("data", "leadership.csv"))
+# presentations <- read_csv(here("data", "presentations.csv"))
+# training <- read_csv(here("data", "training.csv"))
+# skills <- read_csv(here("data", "skills_table.csv"))
+# tools <- read_csv(here("data", "digital_tools.csv"))
+
+readExcelSheets(here::here("Data", "ArthurHeimCareerDataEn.xlsx"))
+
+
+
+#bib <- tempfile(fileext = ".bib")
+
+
+```
+
+
+
+<!-- ```{r eval=FALSE, include=FALSE} -->
+<!-- # To update CV on my website, run the following code in the console: -->
+<!-- # rmarkdown::render("cv-vitae/cv-vitae.Rmd", output_file = "~/Documents/SR/website-apero/static/files/cv-vitae.pdf") -->
+<!-- ``` -->
+
+# Experiences
+
+## Current position(s)
+```{r}
+appointments %>%
+  filter(current == "yes") %>%
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+## Past experiences
+
+```{r}
+appointments %>%
+  filter(current != "yes") %>%
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+# Education
+```{r}
+education %>%
+  detailed_entries(where = Institution,
+                   when = Year,
+                   with = Degree,
+                   what = Major,
+                   why = Details,
+                   .protect = FALSE)
+```
+
+# Skills
+```{r}
+# skills <- read_csv(here("data", "skills.csv"))
+# skills %>%
+#   detailed_entries(with = type,
+#                    why = skill)
+#
+skills %>%
+  kable(booktabs = TRUE, format = "latex",escape = FALSE) %>%
+  kable_styling(full_width = F, latex_options = "hold_position") %>%
+  row_spec(0, bold = T)
+```
+
+\newpage
+
+# Teaching experiences
+
+```{r}
+teaching %>%
+  detailed_entries(what = institution,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   with = role,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+# Most recent or ongoing research
+
+## PhD thesis
+
+```{r}
+Thesis %>%
+  filter(draftAvailable == "yes") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+## Ongoing research
+
+```{r}
+Thesis %>%
+  filter(status == "Ongoing") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+## Collective work on reproducible research
+
+```{r}
+Thesis %>%
+  filter(status == "Collective") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = title,
+                   where = coauthors,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+
+\newpage
+# Pre-doctoral publications in French
+
+
+<!-- Languages -->
+<!-- ------------------------------- -->
+
+<!-- ```{r langforeign, results='markup'} -->
+<!-- data.frame( -->
+<!--   Skill = c("Reading", "Writing", "Listening","Speaking"), -->
+<!--   Spanish = cell_spec(c(rep("Native", 4)), 'latex', color = '#005c7b'),  -->
+<!--   English = cell_spec(c("C2","C1","C2","C2"), 'latex', color = '#009acd'),  -->
+<!--   French = cell_spec(c("B2","B2","B2","B1"), 'latex', color = '#4cb8dc'),  -->
+<!--   German = cell_spec(c("B1","B1","B1","B1"), 'latex', color = '#4cb8dc'),  -->
+<!--   Portuguese = cell_spec(c("B1","A2","B1","A2"), 'latex', color = '#4cb8dc'),  -->
+<!--   Dutch = cell_spec(c("A2","A1","A2","A2"), 'latex', color = '#7fcce6')  -->
+<!-- ) |> -->
+<!--   kable(booktabs = T, align = 'c', escape = F, format = "latex") |> -->
+<!--   kable_styling(full_width = F, font_size = 9, latex_options = "HOLD_position") |>  -->
+<!--   footnote( -->
+<!--     footnote_as_chunk = T, -->
+<!--     general_title = " ", -->
+<!--     general = "\\\\tiny Common European Framework of Reference for Languages: A1/A2: Basic User. B1/B2: Independent User. C1/C2: Proficient User", -->
+<!--     escape = F -->
+<!--   ) |> -->
+<!--   column_spec(column = 1:6, width = '2.4cm') #|>  -->
+<!--   # add_header_above(' ', line = F) |> -->
+<!--   # row_spec(0:4, extra_latex_after = "\\arrayrulecolor{white}")  -->
+<!-- ``` -->
+
+
+<!-- Research Experience -->
+<!-- ==================================================== -->
+<!-- ```{r} -->
+<!-- research %>% -->
+<!--   detailed_entries(what = role, -->
+<!--                    when = dates, #glue::glue("{start_date}--{end_date}"), -->
+<!--                    with = institution, -->
+<!--                    where = where, -->
+<!--                    why = details, -->
+<!--                    .protect = FALSE) -->
+<!-- ``` -->
+
+
+<!-- # Leadership, Service & Community Engagement -->
+<!-- \footnotesize -->
+<!-- *Manuscript peer-review*: Nature Communications (1), Journal of Infectious Diseases (1), PLOS Genetics (1), Malaria Journal (2), International Journal for Parasitology (1), Frontiers in Genetics (2), Infection, Genetics and Evolution (1), Scientific Reports (2), Annals of Global Health (1) -->
+<!-- \normalsize -->
+<!-- ```{r} -->
+<!-- leadership %>% -->
+<!--   detailed_entries(what = glue::glue("\\textbf{<role>}: <institution> (<where>)", -->
+<!--                                      .open = "<", .close = ">"), -->
+<!--                    why = details, -->
+<!--                    when = dates, #glue::glue("{start_date}--{end_date}"),  -->
+<!--                    .protect = FALSE) -->
+
+<!-- # leadership <- leadership %>% mutate(details = replace_na(details, " ")) -->
+
+<!-- # leadership %>% -->
+<!-- #   brief_entries(what = glue::glue("\\textbf{<role>} \\textit{(<institution>)}. <details>", .open = "<", .close = ">"), -->
+<!-- #                 when = dates, .protect = FALSE) -->
+<!-- ``` -->
+
+<!-- \newpage -->
+<!-- # Additional training and professional development -->
+<!-- ```{r} -->
+<!-- training %>% -->
+<!--   brief_entries(what = glue::glue("\\textbf{<training>} (<institution>)", .open = "<", .close = ">"), -->
+<!--                 when = year,  -->
+<!--                 .protect = FALSE) -->
+<!-- ``` -->
+
+<!-- <!-- \newpage --> 
+<!-- # Awards and Funding -->
+<!-- ```{r} -->
+<!-- # awards %>%  -->
+<!-- #   detailed_entries(what = institution, -->
+<!-- #                    when = year, -->
+<!-- #                    with = award, -->
+<!-- #                    why = details) -->
+
+<!-- # need to manually slice awards df for now to avoid massive page break -->
+<!-- awards %>% -->
+<!--   slice(1:11) %>%  -->
+<!--   brief_entries(glue::glue("\\textbf{<award>} (<institution>): <details>", .open = "<", .close = ">"), -->
+<!--                 paste0(year, "\\newline~\\newline"), .protect = FALSE) -->
+<!-- ``` -->
+
+<!-- \newpage -->
+<!-- ```{r} -->
+<!-- awards %>% -->
+<!--   slice(12:n()) %>%  -->
+<!--   brief_entries(glue::glue("\\textbf{<award>} (<institution>): <details>", .open = "<", .close = ">"), -->
+<!--                 paste0(year, "\\newline~\\newline"), .protect = FALSE) -->
+<!-- ``` -->
+
+## Book
+<!-- \footnotesize -->
+```{r}
+# did not like this format so will add manually for now
+bib <- bibliography_entries(here("Data", "publi_heim.bib"))%>%distinct(title,.keep_all = TRUE) %>% 
+  mutate(dt=as.numeric(str_remove_all(id,"[:alpha:]"))) %>% arrange(desc(dt))
+
+bib %>% filter(bib$type=="book")
+
+  #arrange(desc(issued))
+# bibliography_entries(here("data", "papers.bib"))
+```
+
+
+## Other publications
+<!-- \footnotesize -->
+```{r}
+
+
+bib %>% filter(dt<2023 & (type %in% c("webpage",'book')==FALSE) & str_detect(bib$id,"ontaignac")==FALSE)
+
+  #arrange(desc(issued))
+# bibliography_entries(here("data", "papers.bib"))
+```
+
+# Selected conferences
+
+
+```{r}
+conferences %>%
+  detailed_entries(what = institution,
+                   when = date,
+                   with = role,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+<!-- *indicates equal contribution -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2023** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Wei, H., Angrisano, F., Eriksson, E., Mazhari, R., Van, H., Zheng, S., Center, R., Boo, I., McMahon, J., Lau, J., Kiernan-Walker, N., **Ruybal-Pesántez, S.,** Mueller, I., Robinson, L. J., Anderson, D., Drummer, H. (2023). *Serological assays to measure dimeric IgA antibodies in SARS-CoV-2 infections.* Immunology & Cell Biology. http://doi.org/10.1111/imcb.12682  -->
+
+<!-- Tiedje, K. E., Zhan, Q., **Ruybal‐Pesántez, S.**, Tonkin-Hill, G., He, Q., Tan, M.H., Argyropoulos, D. C., Deed, S. L., Ghansah, A., Bangre, O., Oduro, A.R., Koram, K. A., Pascual, M. & Day, K. P.(2023, *pre-print*). *Measuring changes in Plasmodium falciparum census population size in response to sequential malaria control interventions.* medRxiv. https://doi.org/10.1101/2023.05.18.23290210 -->
+
+<!-- Eriksson, E.M., Hart, A., Forde, M., Foroughi, S., Kiernan-Walker, N., MAzhari, R., Lucas, E.C., Margetts, M., Farchione, A., Sheerin, D., Ashdown, G., Evans, R., Chen, C., **Ruybal‐Pesántez, S.**, Conway, E., Barrios, M.H., Cornish, J., Edmonds, M., Henneken, L.M., Ioannidis, L.J., Olechnowicz, S.W.Z., Munnings, R.B., Groom, J. R., Hansen, D.S., Bowden, R., Coussens, A.K., Tye-Din, J.A., Bryan, V.L., Mueller, I. (2023, *pre-print*). *Cohort Profile: A longitudinal Victorian COVID-19 cohort (COVID PROFILE).* medRxiv. https://doi.org/10.1101/2023.04.27.23289157 -->
+
+<!-- **Ruybal‐Pesántez, S.**, Sáenz, F.S., Deed, S. L., Johnson, E. K., Larremore, D. B., Vera-Arias, C. A., Tiedje, K. E., Day, K. P. (2023). *Molecular epidemiology of continued Plasmodium falciparum disease transmission after an outbreak in Ecuador.* Frontiers in Tropical Diseases. https://doi.org/10.3389/fitd.2023.1085862 -->
+
+<!-- Mazhari, R., Takashima, E., Longley, R.J., **Ruybal‐Pesántez, S.**, White, M. T., Kanoi, B. N., Nagaoka, H., Kiniboro, B., Siba, P., Tsuboi, T., Mueller, I. (2023). *Identification of novel Plasmodium vivax proteins associated with protection against clinical malaria.* Frontiers in Cellular and Infection Microbiology (Biology and Pathogenicity of Non-falciparum Malaria - Vol II Research Topic). https://doi.org/10.3389/fcimb.2023.1076150 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2022** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Tiedje, K. E., Oduro, A. R., Bangre O., Amenga‐Etego, L., Dadzie, S. K., Appawu, M. A., Frempong, K., Asoala, V., **Ruybal‐Pesántez, S.**, Narh, C. A., Deed, S. L., Argyropoulos, D. C., Ghansah, A., Agyei, S. A., Segbaya, S., Desewu, K., Williams, I., Simpson, J. A., Malm, K., Pascual, M., Koram, K. A.,  & Day, K. P. (2022). *Indoor residual spraying with a non-pyrethroid insecticide reduces the reservoir of Plasmodium falciparum in a high-transmission area in northern Ghana.* PLOS Global Public Health. https://doi.org/10.1371/journal.pgph.0000285  -->
+
+<!-- Charnaud, S., Munro, J., Semenec, L., Mazhari, R., Brewster, J., Bourke, C., **Ruybal‐Pesántez, S.**, James, R., Lautu‐Gumal, D., Karunajeewa, H., & Mueller, I. (2022). *PacBio long‐read amplicon sequencing for scalable high‐resolution population allele typing of the complex CYP2D6 locus*. Communications Biology. https://doi.org/10.1038/s42003-022-03102-8 -->
+
+<!-- **Ruybal‐Pesántez, S.**, Tiedje, K. E., Pilosof, S., Tonkin‐Hill, G., He, Q., Rask, T. S., Amenga‐Etego, L., Oduro, A. R., Koram, K. A., Pascual, M., & Day, K. P. (2022). *Age‐specific patterns of DBLα var diversity can explain why residents of high malaria transmission areas remain susceptible to Plasmodium falciparum blood stage infection throughout life.* International Journal for Parasitology. https://doi.org/10.1016/j.ijpara.2021.12.001 -->
+
+<!-- \setlength{\leftskip}{2cm} -->
+<!--   **- This work was featured on the Herminthology #WomenBehindTheWork initiative \href{https://facebook.com/102760015458811/posts/151514423916703/?d=n}{\faExternalLink}** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Feng, Q., Tiedje, K. E., **Ruybal‐Pesántez, S.**, Tonkin‐Hill, G., Duffy, M. F., Day, K. P., Shim, H., & Chan, Y. (2022). *An accurate method for identifying recent recombinants from unaligned sequences.* Bioinformatics. https://doi.org/10.1093/bioinformatics/btac012 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2021**  -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- **Ruybal‐Pesántez, S.**, Sáenz, F., Deed, S. L., Johnson, E. K., Larremore, D. B., Vera-Arias, C. A., Tiedje, K. E. & Day, K. P. (2021, *pre-print*). *Clinical malaria incidence following an outbreak in Ecuador was predominantly associated with Plasmodium falciparum with recombinant variant antigen gene repertoires.* medRxiv. https://doi.org/10.1101/2021.04.12.21255093 -->
+
+<!-- Mazhari, R., **Ruybal‐Pesántez, S.**, Angrisano, F., Kiernan‐Walker, N., Hyslop, S., Longley, R. J., Bourke, C., Chen, C., Williamson, D. A., Robinson, L. J., Mueller, I., & Eriksson, E. M. (2021). *SARS‐CoV‐2 Multi‐Antigen Serology Assay*. Methods and Protocols, 4(4), 72. https://doi.org/10.3390/mps4040072 -->
+
+<!-- Argyropoulos, D. C.* , **Ruybal‐Pesántez, S.*** , Deed, S. L., Oduro, A. R., Dadzie, S. K., Appawu, M. A., Asoala, V., Pascual, M., Koram, K. A., Day, K. P., & Tiedje, K. E. (2021). *The impact of indoor residual spraying on Plasmodium falciparum microsatellite variation in an area of high seasonal malaria transmission in Ghana, West Africa*. Molecular Ecology, 30(16), 3974–3992. https://doi.org/10.1111/mec.16029 -->
+
+<!-- \setlength{\leftskip}{2cm} -->
+<!--   **- This work was chosen by the editors to be featured in the Molecular Ecology blog \href{https://molecularecologyblog.com/2021/09/01/interview-with-the-authors-does-indoor-spraying-alter-the-genetic-diversity-of-malaria-causing-parasites-and-what-does-this-mean-for-long-term-control/}{\faExternalLink}** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Tonkin‐Hill, G., **Ruybal‐Pesántez, S.**, Tiedje, K. E., Rougeron, V., Duffy, M. F., Zakeri, S., Pumpaibool, T., Harnyuttanakorn, P., Branch, O. H., Ruiz‐Mesía, L., Rask, T. S., Prugnolle, F., Papenfuss, A. T., Chan, Y., & Day, K. P. (2021). *Evolutionary analyses of the major variant surface antigen‐encoding genes reveal population structure of Plasmodium falciparum within and between continents*. PLOS Genetics, 17(2), e1009269. https://doi.org/10.1371/journal.pgen.1009269 -->
+
+<!-- \setlength{\leftskip}{2cm} -->
+<!--   **- This work was chosen by the editors to be featured with an accompanying Perspectives piece \href{https://doi.org/10.1371/journal.pgen.1009344}{\faExternalLink}** -->
+
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2020** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Narh, C. A., Ghansah, A., Duffy, M. F., **Ruybal‐Pesántez, S.**, Onwona, C. O., Oduro, A. R., Koram, K. A., Day, K. P.* , & Tiedje, K. E.* (2020). *Evolution of antimalarial drug resistance markers in the reservoir of Plasmodium falciparum infections in the Upper East Region of Ghana*. The Journal of Infectious Diseases. https://doi.org/10.1093/infdis/jiaa286 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2019** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- Pilosof, S., He, Q., Tiedje, K. E., **Ruybal‐Pesántez, S.**, Day, K. P., & Pascual, M. (2019). *Competition for hosts modulates vast antigenic diversity to generate persistent strain structure in Plasmodium falciparum.* PLOS Biology, 17(6), e3000336. https://doi.org/10.1371/journal.pbio.3000336 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2018** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- He, Q., Pilosof, S., Tiedje, K. E., **Ruybal‐Pesántez, S.**, Artzy‐Randrup, Y., Baskerville, E. B., Day, K. P., & Pascual, M. (2018). *Networks of genetic similarity reveal non‐neutral processes shape strain structure in Plasmodium falciparum*. Nature Communications, 9(1), 1817. https://doi.org/10.1038/s41467-018-04219-3 -->
+
+<!-- Rorick, M. M., Artzy‐Randrup, Y., **Ruybal‐Pesántez, S.**, Tiedje, K. E., Rask, T. S., Oduro, A., Ghansah, A., Koram, K., Day, K. P., & Pascual, M. (2018). *Signatures of competition and strain structure within the major blood‐stage antigen of Plasmodium falciparum in a local community in Ghana*. Ecology and Evolution, 8(7), 3574–3588. https://doi.org/10.1002/ece3.3803 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+<!-- **2017** -->
+
+<!-- \setlength{\leftskip}{1cm} -->
+<!-- **Ruybal‐Pesántez, S.**, Tiedje, K. E., Rorick, M. M., Amenga‐Etego, L., Ghansah, A., Oduro, A. R., Koram, K. A., & Day, K. P. (2017). *Lack of Geospatial Population Structure Yet Significant Linkage Disequilibrium in the Reservoir of Plasmodium falciparum in Bongo District, Ghana*. The American Journal of Tropical Medicine and Hygiene, 97(4), 1180–1189. https://doi.org/10.4269/ajtmh.17-0119 -->
+
+<!-- **Ruybal‐Pesántez, S.*** , Tiedje, K. E.* , Tonkin‐Hill, G., Rask, T. S., Kamya, M. R., Greenhouse, B., Dorsey, G., Duffy, M. F., & Day, K. P. (2017). *Population genomics of virulence genes of Plasmodium falciparum in clinical isolates from Uganda*. Scientific Reports, 7(1), 11810. https://doi.org/10.1038/s41598-017-11814-9 -->
+
+<!-- \setlength{\leftskip}{0cm} -->
+
+<!-- <!-- \newpage --> 
+<!-- # Digital tools -->
+<!-- \footnotesize -->
+<!-- For other non-traditional academic contributions, I have also developed several `R Shiny` web applications to support COVID-19 surveillance efforts and `R flexdashboard` for real-time updates and data visualization of both programmatic/operational aspects and preliminary epidemiological trends as part of the coordination of population-based field studies. [Check out my GitHub \faExternalLink](https://github.com/shaziaruybal) -->
+<!-- ```{r} -->
+<!-- tools %>% -->
+<!--   detailed_entries(what = authors, -->
+<!--                    when = year, -->
+<!--                    with = tool, -->
+<!--                    why = details, -->
+<!--                    .protect = FALSE) -->
+
+<!-- # tools %>%  -->
+<!-- #   brief_entries(glue::glue("\\textbf{<tool>}, (Authors: <authors>): <details>", .open = "<", .close = ">"), -->
+<!-- #                 paste0(year, "\\newline~\\newline"), .protect = FALSE) -->
+<!-- ``` -->
+
+<!-- <!-- \newpage --> 
+<!-- # Selected presentations -->
+<!-- \footnotesize -->
+<!-- I have participated in oral and poster presentations at >20 conferences (15 international, 5 national; 6 travel awards).  -->
+<!-- ```{r} -->
+<!-- presentations <- presentations %>% filter(include == "yes") -->
+
+<!-- presentations %>% -->
+<!--   brief_entries(glue::glue("\\textbf{<topic>}, <where>", .open = "<", .close = ">"), -->
+<!--                 paste0(year, "\\newline~\\newline"),  -->
+<!--                 .protect = FALSE) -->
+<!-- ``` -->

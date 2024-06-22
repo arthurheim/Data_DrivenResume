@@ -1,0 +1,20 @@
+"0","# appointments <- read_csv(here(""data"", ""appointments.csv""))"
+"0","# education <- read_csv(here(""data"", ""education.csv""))"
+"0","# research <- read_csv(here(""data"", ""research_experience.csv""))"
+"0","# teaching <- read_csv(here(""data"", ""teaching_supervision.csv""))"
+"0","# awards <- read_csv(here(""data"", ""awards.csv""))"
+"0","# leadership <- read_csv(here(""data"", ""leadership.csv""))"
+"0","# presentations <- read_csv(here(""data"", ""presentations.csv""))"
+"0","# training <- read_csv(here(""data"", ""training.csv""))"
+"0","# skills <- read_csv(here(""data"", ""skills_table.csv""))"
+"0","# tools <- read_csv(here(""data"", ""digital_tools.csv""))"
+"0",""
+"0","readExcelSheets(here::here(""Data"", ""ArthurHeimCareerDataEn.xlsx""))"
+"1","[38;5;252mNew names:
+[36m•[38;5;252m `` -> `...2`[39m
+"
+"1","<environment: R_GlobalEnv>
+"
+"0","#bib <- tempfile(fileext = "".bib"")"
+"0",""
+"0",""
