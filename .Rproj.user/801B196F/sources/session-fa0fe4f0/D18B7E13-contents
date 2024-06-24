@@ -3,7 +3,7 @@ name: Arthur
 surname: Heim
 document: ""
 qualifications: PhD
-position: "Postdoctoral researcher, French National Family Allowance Fund (Cnaf)"
+position: "PhD -- analysis and economic policies"
 pronouns: he/they:him/them
 googlescholar: "ALzz0kEAAAAJ"
 address: "Paris, France"
@@ -19,6 +19,7 @@ linkcolor: "ff0080"
 urlcolor: "0000ff" 
 aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. I combine field experiments and microeconometrics to study the effects of active labour market policies for single mothers and how administrative support and information can improve access to early childcare services. I also use market design and implement fair assignment mechanisms for daycare seats in French municipalities."
 header-includes:
+  \usepackage{fontspec}
   \usepackage{float}
   \usepackage{starfont}
   \usepackage{typicons}
@@ -33,17 +34,20 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-
-library(tidyverse)
-library(here)
-library(vitae)
-library(kableExtra)
-library(emojifont)
-library(fontawesome)
-library(tibble)
-library(gglgbtq)
+library(pacman)
+pacman::p_load(
+  tidyverse,
+  here,
+  vitae,
+  rsvg,
+  kableExtra,
+  emojifont,
+  fontawesome,
+  tibble,
+  gglgbtq)
 
 colorsLanguages <- palette_lgbtq("bisexual")
+knitr::opts_chunk$set(dev = 'svg')
 
 ```
 
@@ -84,7 +88,7 @@ readExcelSheets(here::here("Data", "ArthurHeimCareerDataEn.xlsx"))
 
 ```
 
-# Appointments
+\section{Appointments $\quad$ \faSuitcase}
 
 ## Current position
 
@@ -116,7 +120,7 @@ otherjob <- appointments %>%
 otherjob
 ```
 
-# Education
+\section{Education $\quad$ \faInstitution }
 
 ```{r}
 education %>%
@@ -132,7 +136,7 @@ education %>%
 <!-- # Skills -->
 
 
-# PhD thesis
+\section{PhD thesis $\quad$ \faGraduationCap}
 
 ```{r}
 Thesis %>%
@@ -147,7 +151,9 @@ Thesis %>%
 
 
 
-# Programming skills
+\section{Programming skills $\quad$ \faConnectdevelop}
+
+<!-- `r fa('r-project', fill = 'steelblue')` -->
 
 
 ```{r include=TRUE}
@@ -171,7 +177,7 @@ column_spec(column = 1, width = '4 cm',bold=T,color = colorsLanguages[c(1)]) %>%
 ```
 
 
-# Teaching experiences
+\section{Teaching experiences $\quad$ \faGroup}
 
 ```{r}
 teaching %>%
@@ -184,7 +190,7 @@ teaching %>%
 ```
 
 \clearpage
-# working papers and ongoing projects
+\section{Working papers and ongoing projects $\quad$ \faPencilSquare}
 
 ## Ongoing researches
 
@@ -215,7 +221,7 @@ Thesis %>%
 
 
 
-# Publications in French
+\section{Publications $\quad$ \faFolderOpen}
 
 
 ## Book
@@ -232,7 +238,7 @@ bib %>% filter(bib$type=="book")
 ```
 
 
-## Other publications
+## Publications in French
 <!-- \footnotesize -->
 ```{r}
 
@@ -244,7 +250,7 @@ bib %>% filter(dt<2023 & (type %in% c("webpage",'book')==FALSE) & str_detect(bib
 ```
 
 <!-- \clearpage -->
-# Selected conferences
+\section{Selected conferences $\quad$ \faInstitution}
 
 
 ```{r}
