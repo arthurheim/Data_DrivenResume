@@ -136,19 +136,17 @@ education %>%
 <!-- # Skills -->
 
 
-\section{PhD thesis $\quad$ \faGraduationCap}
+\section{Teaching experiences $\quad$ \faGroup}
 
 ```{r}
-Thesis %>%
-  filter(draftAvailable == "yes") %>%
-  detailed_entries(what = subtitle,
-                   when = glue::glue("{status}: {end_date}"),
-                   with = glue::glue("{title} {link}"),
-                   where = coauthors,
+teaching %>%
+  detailed_entries(what = institution,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   with = role,
+                   where = where,
                    why = details,
                    .protect = FALSE)
 ```
-
 
 
 \section{Programming skills $\quad$ \faConnectdevelop}
@@ -177,19 +175,24 @@ column_spec(column = 1, width = '4 cm',bold=T,color = colorsLanguages[c(1)]) %>%
 ```
 
 
-\section{Teaching experiences $\quad$ \faGroup}
+
+\section{PhD thesis $\quad$ \faGraduationCap}
 
 ```{r}
-teaching %>%
-  detailed_entries(what = institution,
-                   when = glue::glue("{start_date}--{end_date}"),
-                   with = role,
-                   where = where,
+Thesis %>%
+  filter(draftAvailable == "yes") %>%
+  detailed_entries(what = subtitle,
+                   when = glue::glue("{status}: {end_date}"),
+                   with = glue::glue("{title} {link}"),
+                   where = coauthors,
                    why = details,
                    .protect = FALSE)
 ```
 
-\clearpage
+
+
+\newpage
+
 \section{Working papers and ongoing projects $\quad$ \faPencilSquare}
 
 ## Ongoing researches
