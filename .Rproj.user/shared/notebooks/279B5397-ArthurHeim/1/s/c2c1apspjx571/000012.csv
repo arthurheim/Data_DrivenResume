@@ -1,8 +1,0 @@
-"0","Thesis %>%"
-"0","  filter(status == ""Collective"") %>%"
-"0","  detailed_entries(what = subtitle,"
-"0","                   when = glue::glue(""{status}: {end_date}""),"
-"0","                   with = title,"
-"0","                   where = coauthors,"
-"0","                   why = details,"
-"0","                   .protect = FALSE)"

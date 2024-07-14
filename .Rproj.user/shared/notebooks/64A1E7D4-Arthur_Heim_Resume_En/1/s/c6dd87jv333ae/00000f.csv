@@ -1,8 +1,0 @@
-"0","appointments %>%"
-"0","  filter(include == ""yes"") %>%"
-"0","  detailed_entries(what = role,"
-"0","                   when = glue::glue(""{start_date}--{end_date}""),"
-"0","                   with = institution,"
-"0","                   where = where,"
-"0","                   why = details,"
-"0","                   .protect = FALSE)"
