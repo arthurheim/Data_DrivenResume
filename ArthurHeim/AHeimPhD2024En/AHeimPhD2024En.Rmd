@@ -11,7 +11,7 @@ address: "Paris, France"
 link-citations: true
 citecolor: blue
 #profilepic: "../img/PSE_a.heimCroped.jpg"
-www: parisschoolofeconomics.eu/en/heim-arthur/
+www: arthurheim.github.io/Personal-Website/
 email: "heimarthur@gmail.com"
 twitter: heimarthur
 headcolor: "a349a4"
