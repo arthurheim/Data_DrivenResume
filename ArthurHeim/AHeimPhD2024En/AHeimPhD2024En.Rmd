@@ -1,15 +1,16 @@
 ---
 name: Arthur
 surname: Heim
-document: ""
+document: 
 qualifications: PhD
 position: "PhD -- analysis and economic policies"
 pronouns: he/they:him/them
 googlescholar: "ALzz0kEAAAAJ"
+github: "arthurheim"
 address: "Paris, France"
 link-citations: true
 citecolor: blue
-#profilepic: "cv-vitae/img/PSE_a.heim-12.jpg"
+#profilepic: "../img/PSE_a.heimCroped.jpg"
 www: parisschoolofeconomics.eu/en/heim-arthur/
 email: "heimarthur@gmail.com"
 twitter: heimarthur
@@ -241,7 +242,7 @@ bib %>% filter(bib$type=="book")
 ```
 
 
-## Publications in French
+## Pre-doctoral and policy work
 <!-- \footnotesize -->
 ```{r}
 
