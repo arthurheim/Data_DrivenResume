@@ -5,13 +5,14 @@ document:
 qualifications: PhD
 position: "PhD -- analysis and economic policies"
 pronouns: he/they:him/them
-googlescholar: "ALzz0kEAAAAJ"
+#googlescholar: "ALzz0kEAAAAJ"
+orcid: '0000-0002-2668-5963'
 github: "arthurheim"
 address: "Paris, France"
 link-citations: true
 citecolor: blue
 #profilepic: "../img/PSE_a.heimCroped.jpg"
-www: arthurheim.github.io/Personal-Website/
+www: arthurheim.github.io/Home/
 email: "heimarthur@gmail.com"
 twitter: heimarthur
 headcolor: "a349a4"
