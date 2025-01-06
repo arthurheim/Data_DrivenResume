@@ -123,6 +123,23 @@ otherjob <- appointments %>%
 otherjob
 ```
 
+
+<!-- ## Expertise, consulting and training -->
+
+<!-- ```{r} -->
+<!-- expertise <- ScientificExpertise %>% -->
+<!--   filter(current != "yes") %>% -->
+<!--   detailed_entries(with = role, -->
+<!--                    when = glue::glue("{start_date}--{end_date}"), -->
+<!--                    what = institution, -->
+<!--                    where = where, -->
+<!--                    why = details, -->
+<!--                    .protect = FALSE) -->
+
+<!-- expertise -->
+<!-- ``` -->
+
+
 \section{Education $\quad$ \faInstitution }
 
 ```{r}
@@ -178,23 +195,53 @@ column_spec(column = 1, width = '4 cm',bold=T,color = colorsLanguages[c(1)]) %>%
 ```
 
 
+\section{Research projects}
 
-\section{PhD thesis $\quad$ \faGraduationCap}
-
+\subsection{PhD Thesis}
 ```{r}
-Thesis %>%
-  filter(draftAvailable == "yes") %>%
-  detailed_entries(what = subtitle,
-                   when = glue::glue("{status}: {end_date}"),
-                   with = glue::glue("{title} {link}"),
-                   where = coauthors,
+ ResearchProjects %>%
+  filter(include == "PhD") %>%
+  detailed_entries(with = Project,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
                    why = details,
                    .protect = FALSE)
+
+```
+
+
+\subsection{Ongoing research projects}
+```{r}
+ ResearchProjects %>%
+  filter(include != "PhD") %>%
+  detailed_entries(with = Project,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+
 ```
 
 
 
-\newpage
+<!-- \section{PhD thesis $\quad$ \faGraduationCap} -->
+
+<!-- ```{r} -->
+<!-- Thesis %>% -->
+<!--   filter(draftAvailable == "yes") %>% -->
+<!--   detailed_entries(what = subtitle, -->
+<!--                    when = glue::glue("{status}: {end_date}"), -->
+<!--                    with = glue::glue("{title} {link}"), -->
+<!--                    where = coauthors, -->
+<!--                    why = details, -->
+<!--                    .protect = FALSE) -->
+<!-- ``` -->
+
+
+
+<!-- \newpage -->
 
 \section{Working papers and ongoing projects $\quad$ \faPencilSquare}
 
@@ -234,7 +281,7 @@ Thesis %>%
 <!-- \footnotesize -->
 ```{r}
 # did not like this format so will add manually for now
-bib <- bibliography_entries(here("Data", "publi_heim.bib"))%>%distinct(title,.keep_all = TRUE) %>% 
+bib <- bibliography_entries(here("Data", "publi_heim2.bib"))%>%distinct(title,.keep_all = TRUE) %>% 
   mutate(dt=as.numeric(str_remove_all(id,"[:alpha:]"))) %>% arrange(desc(dt))
 
 bib %>% filter(bib$type=="book")
