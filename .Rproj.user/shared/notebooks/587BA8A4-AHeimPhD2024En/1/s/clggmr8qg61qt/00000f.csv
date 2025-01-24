@@ -1,7 +1,0 @@
-"0","conferences %>%"
-"0","  detailed_entries(what = institution,"
-"0","                   when = date,"
-"0","                   with = role,"
-"0","                   where = where,"
-"0","                   why = details,"
-"0","                   .protect = FALSE)"
