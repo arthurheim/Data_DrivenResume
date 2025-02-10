@@ -11,4 +11,4 @@ To do something like that on your own:
 That's it.
 
 
-Access the last version [here](https://raw.githubusercontent.com/arthurheim/Data_DrivenResume/mainAHeimPhD2024En.pdf)
+Access the last version [here](https://raw.githubusercontent.com/arthurheim/Data_DrivenResume/main/AHeimPhD2024En.pdf)
