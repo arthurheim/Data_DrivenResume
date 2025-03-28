@@ -19,7 +19,7 @@ headcolor: "a349a4"
 footcolor: "ff0080"
 linkcolor: "ff0080"
 urlcolor: "0000ff" 
-aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. My work is mostly based on randomised experiments and microeconometrics for policy evaluation. I also manage a programme turning into a national policy using market designs to assign daycare seats in French municipalities. I am currently working as project manager in the Research Evaluation and Statistics department (DSER) of the French National family allowance fund (Cnaf)."
+aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. My work is mostly based on randomised experiments and microeconometrics for policy evaluation. I also manage a programme using market designs to assign daycare seats in French municipalities. I am currently working as project manager in the Research Evaluation and Statistics department (DSER) of the French National family allowance fund (Cnaf)."
 header-includes:
   \usepackage{fontspec}
   \usepackage{float}
@@ -268,7 +268,7 @@ teaching %>%
 
 ```{r PubECEC}
 PapersECEC <- PaperDetails %>%
-  filter(bibtex_ID %in% c("CarbucciaEtAl2024","CombeHeim2024")) %>% as.tibble() %>% 
+  filter(bibtex_ID %in% c("CarbucciaEtAl2024","CombeHeim2024")) %>% arrange(bibtex_ID) %>% as.tibble() %>% 
   detailed_entries(with = title,
                    when = status,
                    what = coauthors,
@@ -471,7 +471,7 @@ bib %>% filter( id %in% c("HeimGalinie2016",
 
 
 ```{r}
-conferences %>%
+conferences %>% filter(include=="yes") %>% #arrange(desc(date)) %>% 
   detailed_entries(what = institution,
                    when = date,
                    with = role,

@@ -474,7 +474,7 @@ bib %>% filter( id %in% c("HeimGalinie2016",
 
 
 ```{r}
-conferences %>%
+conferences %>% filter(include=="yes")%>%
   detailed_entries(what = institution,
                    when = date,
                    with = role,
