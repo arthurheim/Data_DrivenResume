@@ -163,7 +163,7 @@ education %>%
 
 ```{r include=TRUE}
  ResearchProjects %>%
-  filter(type %in% c("market design")) %>% 
+  filter(type %in% c("market design") & str_detect(Project,"ISAJE")) %>% 
   detailed_entries(with = Project,
                    when = glue::glue("{start_date}--{end_date}"),
                    what = institution,
