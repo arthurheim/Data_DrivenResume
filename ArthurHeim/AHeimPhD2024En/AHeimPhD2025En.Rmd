@@ -19,7 +19,7 @@ headcolor: "a349a4"
 footcolor: "ff0080"
 linkcolor: "ff0080"
 urlcolor: "0000ff" 
-aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. My work is mostly based on randomised experiments and microeconometrics for policy evaluation. I also manage a programme using market designs to assign daycare seats in French municipalities. I am currently working as project manager in the Research Evaluation and Statistics department (DSER) of the French National family allowance fund (Cnaf)."
+aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. My work is mostly based on randomised experiments and microeconometrics for policy evaluation. I also manage a programme using market designs to assign daycare seats in French municipalities."
 header-includes:
   \usepackage{fontspec}
   \usepackage{float}
@@ -92,7 +92,7 @@ readExcelSheets(here::here("Data", "ArthurHeimCareerDataEn.xlsx"))
 
 \section{Appointments $\quad$ \faSuitcase}
 
-## Current position
+## Current job
 
 ```{r CurJob}
 MyJob <- appointments %>%
@@ -107,7 +107,7 @@ MyJob <- appointments %>%
 MyJob
 ```
 
-## Past experiences
+## Former positions
 
 ```{r}
 otherjob <- appointments %>%
@@ -136,8 +136,66 @@ education %>%
                    .protect = FALSE)
 ```
 
-\newpage
+
+
+\section{Distinctions $\quad$ \faTrophy }
+
+```{r}
+Distinctions %>%
+  detailed_entries(where = Institution,
+                   when = Year,
+                   with = Degree,
+                   what = Major,
+                   why = Details,
+                   .protect = FALSE)
+```
+
+
 <!-- # Skills -->
+
+<!-- \section{Grants \& awards} -->
+
+<!-- \subsection{Dissertation awards} -->
+
+<!-- **1st prize** (ex aequo) of the 2025 best Ph.D. Dissertation Award from the -->
+<!-- Cour des Comptes -->
+
+
+
+\section{Teaching experiences $\quad$ \faGroup}
+
+```{r}
+teaching %>%
+  detailed_entries(what = where,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   with = role,
+                   where = institution,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+
+# Expertise, consulting and training
+
+```{r}
+expertise <- ScientificExpertise %>%
+  filter(current != "yes") %>%
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+
+expertise
+```
+
+
+\section{Referee reports}
+
+Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
 
 
 \section{Project management}
@@ -158,6 +216,7 @@ education %>%
 
 ```
 
+<!-- \clearpage -->
 \subsection{Market design}
 <!-- ### Ongoing {-} -->
 
@@ -187,74 +246,6 @@ education %>%
                    .protect = FALSE)
 
 ```
-
-
-<!-- \section{PhD thesis $\quad$ \faGraduationCap} -->
-
-<!-- ```{r} -->
-<!-- Thesis %>% -->
-<!--   filter(draftAvailable == "yes") %>% -->
-<!--   detailed_entries(what = subtitle, -->
-<!--                    when = glue::glue("{status}: {end_date}"), -->
-<!--                    with = glue::glue("{title} {link}"), -->
-<!--                    where = coauthors, -->
-<!--                    why = details, -->
-<!--                    .protect = FALSE) -->
-<!-- ``` -->
-
-
-
-<!-- \newpage -->
-
-<!-- \section{Working papers and ongoing projects $\quad$ \faPencilSquare} -->
-
-<!-- ## Ongoing researches -->
-
-<!-- ```{r} -->
-<!-- Thesis %>% -->
-<!--   filter(status == "Ongoing") %>% -->
-<!--   detailed_entries(what = subtitle, -->
-<!--                    when = glue::glue("{status}: {end_date}"), -->
-<!--                    with = title, -->
-<!--                    where = coauthors, -->
-<!--                    why = details, -->
-<!--                    .protect = FALSE) -->
-<!-- ``` -->
-
-
-
-# Expertise, consulting and training
-
-```{r}
-expertise <- ScientificExpertise %>%
-  filter(current != "yes") %>%
-  detailed_entries(with = role,
-                   when = glue::glue("{start_date}--{end_date}"),
-                   what = institution,
-                   where = where,
-                   why = details,
-                   .protect = FALSE)
-
-expertise
-```
-
-
-
-
-
-
-\section{Teaching experiences $\quad$ \faGroup}
-
-```{r}
-teaching %>%
-  detailed_entries(what = where,
-                   when = glue::glue("{start_date}--{end_date}"),
-                   with = role,
-                   where = institution,
-                   why = details,
-                   .protect = FALSE)
-```
-
 
 
 
@@ -319,7 +310,7 @@ bib %>% filter( id %in% c("Heim2024", "GalitzineHeim2024"))
 # bibliography_entries(here("data", "papers.bib"))
 ```
 
-\clearpage
+<!-- \clearpage -->
 ## Collective work on reproducible research
 
 ```{r}
@@ -557,7 +548,6 @@ column_spec(column = 1, width = '4 cm',bold=T,color = colorsLanguages[c(1)]) %>%
   column_spec(column = 2,width = '4 cm', italic = T,color = colorsLanguages[c(2)]) 
 
 ```
-
 
 <!-- \clearpage -->
 

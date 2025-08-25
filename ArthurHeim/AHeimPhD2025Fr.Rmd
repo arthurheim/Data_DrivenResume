@@ -19,7 +19,7 @@ headcolor: "a349a4"
 footcolor: "ff0080"
 linkcolor: "ff0080"
 urlcolor: "0000ff" 
-aboutme: "Je suis économiste appliqué, spécialisé dans la conception et l’évaluation des politiques publiques visant à réduire les inégalités et la pauvreté en France. Mon travail repose principalement sur des expériences randomisées et la microéconométrie pour l’évaluation des politiques. Je pilote également un programme utilisant des mécanismes de marché pour l’attribution des places en crèche dans plusieurs municipalités françaises."
+aboutme: "Je suis économiste appliqué, spécialisé dans la conception et l’évaluation des politiques publiques visant à réduire les inégalités et la pauvreté en France. J'ai reçu le prix de thèse 2025 de la cour des comptes. Mon travail repose principalement sur des expériences randomisées et la microéconométrie pour l’évaluation des politiques."
 header-includes:
   \usepackage{fontspec}
   \usepackage{float}
@@ -139,11 +139,25 @@ education %>%
                    .protect = FALSE)
 ```
 
+\section{Distinctions $\quad$ \faTrophy }
+
+```{r}
+Distinctions %>%
+  detailed_entries(where = Institution,
+                   when = Year,
+                   with = Degree,
+                   what = Major,
+                   why = Details,
+                   .protect = FALSE)
+```
+
+
+
 \newpage
 <!-- # Skills -->
 
 
-\section{Gestion de projet}
+\section{Gestion de projet $\quad$}
 
 \subsection{Expérimentation de terrain}
 
@@ -192,6 +206,7 @@ education %>%
 ```
 
 
+
 <!-- \section{PhD thesis $\quad$ \faGraduationCap} -->
 
 <!-- ```{r} -->
@@ -226,7 +241,7 @@ education %>%
 
 
 
-# Éxpertise, conseil et formations
+\section{Éxpertise, conseil et formations $\quad$}
 
 ```{r}
 expertise <- ScientificExpertise %>%
@@ -241,8 +256,9 @@ expertise <- ScientificExpertise %>%
 expertise
 ```
 
+\section{Referee reports}
 
-
+Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
 
 
 
@@ -344,23 +360,21 @@ why = details,
 
 
 
+## Thèse de doctorat
 
 
-<!-- ## PhD Thesis -->
+```{r PhDThesis}
+PhDThesis <- PaperDetails %>%
+  filter(bibtex_ID %in% c("Heim2024a")) %>% as.tibble() %>%
+  detailed_entries(with = title,
+                   when = status,
+                   what = coauthors %>% replace_na(.,""),
+                   where = glue::glue("{end_date}"),
+                   why = details,
+                   .protect = FALSE)
+PhDThesis
 
-
-<!-- ```{r PhDThesis} -->
-<!-- PhDThesis <- PaperDetails %>% -->
-<!--   filter(bibtex_ID %in% c("Heim2024a")) %>% as.tibble() %>% -->
-<!--   detailed_entries(with = title, -->
-<!--                    when = status, -->
-<!--                    what = coauthors %>% replace_na(.,""), -->
-<!--                    where = glue::glue("{end_date}"), -->
-<!--                    why = details, -->
-<!--                    .protect = FALSE) -->
-<!-- PhDThesis -->
-
-<!-- ``` -->
+```
 
 <!-- Thesis --> 
 
@@ -418,7 +432,6 @@ bib <- bibliography_entries(here("Data", "publi_heim2.bib"))%>%distinct(title,.k
 
 bib %>% filter( id %in% c("FougereHeim2019" ,
                           "FougereHeim2019a",
-                          "Heim2018",
                           "Heim2017",
                           "Heim2017a"))
 
@@ -436,7 +449,8 @@ bib %>% filter( id %in% c("FougereHeim2019" ,
 bib <- bibliography_entries(here("Data", "publi_heim2.bib"))%>%distinct(title,.keep_all = TRUE) %>% 
   mutate(dt=as.numeric(str_remove_all(id,"[:alpha:]"))) %>% arrange(desc(dt))
 
-bib %>% filter( id %in% c("HeimGalinie2016",
+bib %>% filter( id %in% c("Heim2018",
+                          "HeimGalinie2016",
                           "HeimNi2016" ,
                           "MonsEtAl2015",
                           "HeimSteinmetz2015",
@@ -466,7 +480,6 @@ bib %>% filter( id %in% c("HeimGalinie2016",
 <!--   #arrange(desc(issued)) -->
 <!-- # bibliography_entries(here("data", "papers.bib")) -->
 <!-- ``` -->
-
 
 
 <!-- \clearpage -->
