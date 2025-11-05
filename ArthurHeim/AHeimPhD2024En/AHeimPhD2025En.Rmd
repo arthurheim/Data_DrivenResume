@@ -259,7 +259,7 @@ Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP)
 
 ```{r PubECEC}
 PapersECEC <- PaperDetails %>%
-  filter(bibtex_ID %in% c("CarbucciaEtAl2024","CombeHeim2024")) %>% arrange(bibtex_ID) %>% as.tibble() %>% 
+  filter(bibtex_ID %in% c("CarbucciaEtAl2025","CombeHeim2024")) %>% arrange(bibtex_ID) %>% as.tibble() %>% 
   detailed_entries(with = title,
                    when = status,
                    what = coauthors,
@@ -315,7 +315,7 @@ bib %>% filter( id %in% c("Heim2024", "GalitzineHeim2024"))
 
 ```{r}
 PaperDetails %>%
-  filter(bibtex_ID %in% "multi1002024") %>%
+  filter(bibtex_ID %in% "multi1002025") %>%
   detailed_entries(with = title,
 when = status,
 what = coauthors %>% replace_na(.,""),
