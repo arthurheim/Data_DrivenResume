@@ -19,7 +19,7 @@ headcolor: "a349a4"
 footcolor: "ff0080"
 linkcolor: "ff0080"
 urlcolor: "0000ff" 
-aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. My work is mostly based on randomised experiments and microeconometrics for policy evaluation. I also manage a programme using market designs to assign daycare seats in French municipalities."
+aboutme: "I am an applied economist working on the design and evaluation of public policies to reduce inequalities and poverty in France. I received the Best dissertation award of the French Court of auditors. My work is mostly based on randomised experiments and microeconometrics for policy evaluation."
 header-includes:
   \usepackage{fontspec}
   \usepackage{float}
@@ -151,54 +151,8 @@ Distinctions %>%
 ```
 
 
-<!-- # Skills -->
 
-<!-- \section{Grants \& awards} -->
-
-<!-- \subsection{Dissertation awards} -->
-
-<!-- **1st prize** (ex aequo) of the 2025 best Ph.D. Dissertation Award from the -->
-<!-- Cour des Comptes -->
-
-
-
-\section{Teaching experiences $\quad$ \faGroup}
-
-```{r}
-teaching %>%
-  detailed_entries(what = where,
-                   when = glue::glue("{start_date}--{end_date}"),
-                   with = role,
-                   where = institution,
-                   why = details,
-                   .protect = FALSE)
-```
-
-
-
-
-# Expertise, consulting and training
-
-```{r}
-expertise <- ScientificExpertise %>%
-  filter(current != "yes") %>%
-  detailed_entries(with = role,
-                   when = glue::glue("{start_date}--{end_date}"),
-                   what = institution,
-                   where = where,
-                   why = details,
-                   .protect = FALSE)
-
-expertise
-```
-
-
-\section{Referee reports}
-
-Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
-
-
-\section{Project management}
+\section{Project management $\quad$ \faLaptop}
 
 \subsection{Field experiments}
 
@@ -248,6 +202,44 @@ Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP)
 ```
 
 
+
+
+
+
+\section{Teaching experiences $\quad$ \faGroup}
+
+```{r}
+teaching %>%
+  detailed_entries(what = where,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   with = role,
+                   where = institution,
+                   why = details,
+                   .protect = FALSE)
+```
+
+
+
+
+\section{Expertise, consulting and training $\quad$ \faBarChartO}
+
+```{r}
+expertise <- ScientificExpertise %>%
+  filter(current != "yes") %>%
+  detailed_entries(with = role,
+                   when = glue::glue("{start_date}--{end_date}"),
+                   what = institution,
+                   where = where,
+                   why = details,
+                   .protect = FALSE)
+
+expertise
+```
+
+
+\section{Referee reports  $\quad$ \faCommenting}
+
+Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
 
 
 \section{Publications $\quad$ \faFolderOpen}
@@ -366,7 +358,7 @@ why = details,
 <!-- ``` -->
 
 
-### Book in French  {-}
+## Book in French
 <!-- \footnotesize -->
 ```{r}
 # did not like this format so will add manually for now
@@ -457,7 +449,7 @@ bib %>% filter( id %in% c("HeimGalinie2016",
 
 
 
-<!-- \clearpage -->
+\clearpage
 \section{Selected conferences $\quad$ \faInstitution}
 
 
@@ -473,7 +465,7 @@ conferences %>% filter(include=="yes") %>% #arrange(desc(date)) %>%
 
 
 
-# Languages 
+\section{Languages  $\quad$ \faLanguage}
 
 ```{r simpleLang, results='markup'}
 # tribble(

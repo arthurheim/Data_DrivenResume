@@ -19,7 +19,7 @@ headcolor: "a349a4"
 footcolor: "ff0080"
 linkcolor: "ff0080"
 urlcolor: "0000ff" 
-aboutme: "Je suis économiste appliqué, spécialisé dans la conception et l’évaluation des politiques publiques visant à réduire les inégalités et la pauvreté en France. J'ai reçu le prix de thèse 2025 de la cour des comptes. Mon travail repose principalement sur des expériences randomisées et la microéconométrie pour l’évaluation des politiques."
+aboutme: "Je suis économiste appliqué, spécialisé dans la conception et l’évaluation des politiques publiques visant à réduire les inégalités et la pauvreté en France. J'ai reçu le prix de thèse 2025 de la Cour des comptes. Mon travail repose principalement sur des expériences randomisées et la microéconométrie pour l’évaluation des politiques."
 header-includes:
   \usepackage{fontspec}
   \usepackage{float}
@@ -157,9 +157,9 @@ Distinctions %>%
 <!-- # Skills -->
 
 
-\section{Gestion de projet $\quad$}
+\section{Gestion de projets $\quad$ \faLaptop}
 
-\subsection{Expérimentation de terrain}
+\subsection{Expérimentations de terrain}
 
 <!-- ### Completed {-} -->
 
@@ -241,7 +241,7 @@ Distinctions %>%
 
 
 
-\section{Éxpertise, conseil et formations $\quad$}
+\section{Éxpertise, conseil et formations $\quad$ \faBarChartO}
 
 ```{r}
 expertise <- ScientificExpertise %>%
@@ -255,11 +255,6 @@ expertise <- ScientificExpertise %>%
 
 expertise
 ```
-
-\section{Referee reports}
-
-Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
-
 
 
 \section{Enseignements $\quad$ \faGroup}
@@ -275,6 +270,10 @@ teaching %>%
 ```
 
 
+
+\section{Referee reports $\quad$ \faCommenting}
+
+Journal of Economic Policy and Management (JEPM), Journal of Labor policy (JOLP), La revue économique (RECO), Revue des politiques sociales et familiales (RPSF), Revue Française de Pédagogie, Éducation et Formation
 
 
 
@@ -391,8 +390,7 @@ PhDThesis
 <!-- # bibliography_entries(here("data", "papers.bib")) -->
 <!-- ``` -->
 
-
-### Livre  {-}
+## Livre
 <!-- \footnotesize -->
 ```{r}
 # did not like this format so will add manually for now
@@ -498,7 +496,7 @@ conferences %>% filter(include=="yes")%>%
 
 
 
-# Langues 
+\section{Langues $\quad$ \faLanguage}
 
 ```{r simpleLang, results='markup'}
 # tribble(
